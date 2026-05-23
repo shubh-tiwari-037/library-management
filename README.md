@@ -277,12 +277,13 @@ Create Rental Book
 API Path
 POST -> rent-book
 Request Body
-
+```base
 {
   "userId": 1,
   "bookId": 2,
   "dueDate": 4
 }
+```
 
 Get All Rented Books
 API Path
