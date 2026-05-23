@@ -179,3 +179,135 @@ http://127.0.0.1:{GFAFANA_PORT}
 http://127.0.0.1:{PROMETHEUS_PORT}
 
 ```
+
+# Documentation liberary-management
+
+
+Book Module Features
+
+Implemented full CRUD APIs for managing books:
+
+Create Book API
+Get All Books API
+Get Book By ID API
+Update Book API
+Delete Book API
+
+The module manages complete book information such as title, author, category, language, shelf number, total copies, and available copies.
+Also implemented validation, exception handling, and stock management logic.
+---
+✅ Rental Module Features
+
+Implemented APIs for managing rented books:
+
+Create Rent Book API
+Get All Rented Books API
+Get Rented Book By ID API
+Return Rented Book API
+User Rental History API
+
+The rental system tracks:
+
+Which user rented which book
+Issued librarian details
+Rent date and due date
+Returned book status
+Total books rented by a user
+
+Also implemented logic to automatically decrease available copies when a book is rented and increase available copies when the book is returned.
+---
+
+# Books API Structure
+Create Book
+API Path
+ POST ->  book/create
+
+Request Body
+```base
+{
+  "title": "Atomic Habits",
+  "description": "Self improvement book",
+  "author": "James Clear",
+  "publishedYear": 2018,
+  "category": "Programming",
+  "language": "Hindi",
+  "totalCopies": 20,
+  "shelfNumber": 12,
+  "status": "Available"
+}
+```
+
+
+GET Books
+API Path
+ GET ->  book
+
+
+Get Book By ID
+API PATH
+GET -> book/:id
+
+Update Book
+API Path
+  /books/:id
+
+```base
+request body
+{
+  "title": "string",
+  "description": "string",
+  "author": "string",
+  "publishedYear": 0,
+  "category": "Fiction",
+  "language": "English",
+  "totalCopies": 0
+}
+```
+
+  Delete Book
+Method-->  DELETE
+API Path
+/books/:id
+
+
+
+# Rental Book API Structure
+Create Rental Book
+
+API Path
+POST -> rent-book
+Request Body
+
+{
+  "userId": 1,
+  "bookId": 2,
+  "dueDate": 4
+}
+
+Get All Rented Books
+API Path
+GET -> rent-book
+
+
+Get User Rental History
+API Path
+GET -> rent-book/history
+Example
+GET -> rent-book/history?userId=1
+Request Body{}
+
+
+Get Rental Book By ID
+API Path
+GET -> rent-book/:id
+Example
+GET -> rent-book/1
+
+Return Rented Book
+API Path
+PATCH -> rent-book/return/:id
+Example
+PATCH -> rent-book/return/1
+
+request body 
+Param(id)

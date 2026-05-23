@@ -60,10 +60,7 @@ async userHistory(userId: number) {
 }
 
   async rentBook(createRentBookDto: CreateRentBookDto,librarianId:number) {
-    
   const { userId, bookId, dueDate} = createRentBookDto;
-
-
   const user = await this.prisma.user.findUnique({
     where: {
       id: userId,
@@ -279,10 +276,7 @@ async rentalById(id: number) {
 }
 
 
-  async returnBook(
-  updateRentBookDto: UpdateRentBookDto,
-  id: number,
-) {
+  async returnBook(updateRentBookDto: UpdateRentBookDto,id: number,) {
   const rental = await this.prisma.rental.findUnique({
     where: {
       id,

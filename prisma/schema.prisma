@@ -102,11 +102,10 @@ model User {
   meta         UserMeta?
   settings     UserSetting[]
 
-  books   Book[]
- 
- librarian       Rental[] @relation("UserRentals")
-   rentedUser   Rental[] @relation("IssuedBooks")
-  
+  books Book[]
+
+  librarian  Rental[] @relation("UserRentals")
+  rentedUser Rental[] @relation("IssuedBooks")
 
   @@index([email])
   @@map("user")
@@ -129,39 +128,39 @@ model Book {
   description     String?
   author          String
   publishedYear   Int?         @map("published_year")
-  bookCode          Int         @map("book_code") @unique
+  bookCode        Int          @unique @map("book_code")
   category        BookCategory @default(Technology)
-  language        BookLanguage @map("book_language") @default(Hindi)
+  language        BookLanguage @default(Hindi) @map("book_language")
   totalCopies     Int          @map("total_book_copies")
-  availableCopies Int          
+  availableCopies Int
   shelfNumber     Int
   status          BookStatus   @default(Available)
 
-  librarian       User         @relation(fields: [librarianId], references: [id])
-  rental          Rental[]
-  createdAt       DateTime     @default(now()) @map("created_at")
-  updatedAt       DateTime     @updatedAt @map("updated_at")
+  librarian User     @relation(fields: [librarianId], references: [id])
+  rental    Rental[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("books")
 }
 
-  model Rental {
-    id         Int          @id @default(autoincrement())
-    userId     Int          @map("user_id")
-    bookId     Int          @map("book_id")
-    librarianId  Int          @map("issued_by_id")
-    rentedAt   DateTime     @default(now()) @map("rented_at")
-    dueDate    DateTime     @map("due_date") 
-    returnedAt DateTime?    @map("returned_at")
-    status     RentalStatus @default(Active)
-    fineAmount Float        @default(0) @map("fine_amount")
+model Rental {
+  id          Int          @id @default(autoincrement())
+  userId      Int          @map("user_id")
+  bookId      Int          @map("book_id")
+  librarianId Int          @map("issued_by_id")
+  rentedAt    DateTime     @default(now()) @map("rented_at")
+  dueDate     DateTime     @map("due_date")
+  returnedAt  DateTime?    @map("returned_at")
+  status      RentalStatus @default(Active)
+  fineAmount  Float        @default(0) @map("fine_amount")
 
-    createdAt DateTime @default(now()) @map("created_at")
-    updatedAt DateTime @updatedAt @map("updated_at")
-    librarian   User     @relation("IssuedBooks", fields: [librarianId ], references: [id])
-    rentedUser       User        @relation("UserRentals", fields: [userId], references: [id])
-    book      Book     @relation(fields: [bookId], references: [id])
-  }
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  librarian  User     @relation("IssuedBooks", fields: [librarianId], references: [id])
+  rentedUser User     @relation("UserRentals", fields: [userId], references: [id])
+  book       Book     @relation(fields: [bookId], references: [id])
+}
 
 enum OtpTransport {
   Email  @map("email")
