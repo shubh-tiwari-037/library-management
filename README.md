@@ -218,7 +218,8 @@ Also implemented logic to automatically decrease available copies when a book is
 ---
 
 # Books API Structure
-Create Book
+# Create Book
+
 API Path
  POST ->  book/create
 
@@ -238,16 +239,16 @@ Request Body
 ```
 
 
-GET Books
+# GET Books
 API Path
  GET ->  book
 
 
-Get Book By ID
+# Get Book By ID
 API PATH
 GET -> book/:id
-
-Update Book
+---
+# Update Book
 API Path
   /books/:id
 
@@ -263,16 +264,16 @@ request body
   "totalCopies": 0
 }
 ```
-
+ 
   Delete Book
 Method-->  DELETE
 API Path
 /books/:id
-
+---
 
 
 # Rental Book API Structure
-Create Rental Book
+# Create Rental Book
 
 API Path
 POST -> rent-book
@@ -285,12 +286,12 @@ Request Body
 }
 ```
 
-Get All Rented Books
+# Get All Rented Books
 API Path
 GET -> rent-book
 
 
-Get User Rental History
+ # Get User Rental History
 API Path
 GET -> rent-book/history
 Example
@@ -298,17 +299,15 @@ GET -> rent-book/history?userId=1
 Request Body{}
 
 
-Get Rental Book By ID
+# Get Rental Book By ID
 API Path
 GET -> rent-book/:id
 Example
 GET -> rent-book/1
 
-Return Rented Book
+# Return Rented Book
 API Path
 PATCH -> rent-book/return/:id
-Example
-PATCH -> rent-book/return/1
 
 request body 
 Param(id)

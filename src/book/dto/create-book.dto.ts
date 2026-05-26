@@ -1,13 +1,24 @@
-import { IsEnum,IsNotEmpty, IsInt,IsString, IsOptional, Min} from "class-validator";
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsInt,
+  IsString,
+  IsOptional,
+  Min,
+} from 'class-validator';
 
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { BookCategory,BookLanguage,BookStatus } from "src/generated/prisma/enums";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import {
+  BookCategory,
+  BookLanguage,
+  BookStatus,
+} from 'src/generated/prisma/enums';
 
 export class CreateBookDto {
- @ApiProperty()
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  title: string;
+  title!: string;
 
   @ApiPropertyOptional()
   @IsOptional()
@@ -17,44 +28,42 @@ export class CreateBookDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  author: string;
+  author!: string;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsInt()
   publishedYear?: number;
 
-  
-@IsNotEmpty()
-   @IsInt()
- @ApiProperty()
-  bookCode:number
+  @IsNotEmpty()
+  @IsInt()
+  @ApiProperty()
+  bookCode!: number;
 
   @ApiProperty({
     enum: BookCategory,
-     example: BookCategory.Fiction,
+    example: BookCategory.Fiction,
   })
   @IsEnum(BookCategory)
-  category: BookCategory;
+  category!: BookCategory;
 
   @ApiProperty({
-     example: BookLanguage.English,
+    example: BookLanguage.English,
     enum: BookLanguage,
   })
   @IsEnum(BookLanguage)
-  language: BookLanguage;
+  language!: BookLanguage;
 
   @ApiProperty({
     default: 20,
   })
   @IsInt()
   @Min(1)
-  totalCopies: number;
+  totalCopies!: number;
 
-  
   @ApiProperty()
   @IsInt()
-  shelfNumber: number;
+  shelfNumber!: number;
 
   @ApiPropertyOptional({
     enum: BookStatus,
@@ -63,5 +72,4 @@ export class CreateBookDto {
   @IsOptional()
   @IsEnum(BookStatus)
   status?: BookStatus;
-
 }

@@ -17,7 +17,7 @@ export class BookController {
 @Roles(UserType.Librarian)
 @ApiBearerAuth()
   @Post("create")
-  create(@Body() createBookDto: CreateBookDto,@Req() req:AuthenticatedRequest) {
+  create(@Query() createBookDto: CreateBookDto,@Req() req:AuthenticatedRequest) {
     const id = req.user.id
     return this.bookService.addBook(createBookDto,id);
   }
